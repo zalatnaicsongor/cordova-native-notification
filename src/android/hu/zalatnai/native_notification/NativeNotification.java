@@ -8,7 +8,7 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
 
-public class NotificationPlugin extends CordovaPlugin {
+public class NativeNotification extends CordovaPlugin {
     public static final String LOG_TAG = "NotificationPlugin";
 
     /**

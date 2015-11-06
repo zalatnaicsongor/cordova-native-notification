@@ -26,7 +26,8 @@
 
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="NativeNotification" >
-                <param name="android-package" value="hu.zalatnai.native_notification"/>
+                <param name="android-package" value="hu.zalatnai.native_notification.NotificationPlugin"/>
+                <param name="onload" value="true" />
             </feature>
         </config-file>
 

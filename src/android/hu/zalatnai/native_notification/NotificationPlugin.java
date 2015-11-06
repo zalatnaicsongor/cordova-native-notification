@@ -30,7 +30,7 @@ public class NotificationPlugin extends CordovaPlugin {
                                                 .getToken(
                                                         data.getJSONObject(0).getString("senderId"),
                                                         GoogleCloudMessaging.INSTANCE_ID_SCOPE
-                                                ), null);
+                                                ));
                 return true;
             } catch (Exception e) {
                 callbackContext.error(e.getMessage());

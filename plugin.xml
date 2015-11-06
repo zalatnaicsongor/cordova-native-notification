@@ -72,7 +72,7 @@
 
         <source-file src="src/android/hu/zalatnai/native_notification/GCMIntentService.java" target-dir="src/hu/zalatnai/native_notification/" />
         <source-file src="src/android/hu/zalatnai/native_notification/PushInstanceIDListenerService.java" target-dir="src/hu/zalatnai/native_notification/" />
-        <source-file src="src/android/hu/zalatnai/native_notification/NotificationPlugin.java" target-dir="src/hu/zalatnai/native_notification/" />
+        <source-file src="src/android/hu/zalatnai/native_notification/NativeNotification.java" target-dir="src/hu/zalatnai/native_notification/" />
 
     </platform>
 </plugin>

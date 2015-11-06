@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="cordova-native-notification"
+        version="1.0.0">
+
+    <name>NativeNotification</name>
+    <author>Csongor Zalatnai</author>
+
+    <description>
+        This plugin allows your application to receive push notifications.
+    </description>
+
+    <license>MIT</license>
+
+    <js-module src="www/push.js" name="NativeNotification">
+        <clobbers target="NativeNotification" />
+    </js-module>
+
+    <engines>
+        <engine name="cordova" version=">=5.0.0" />
+    </engines>
+
+    <!-- android -->
+    <platform name="android">
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="NativeNotification" >
+                <param name="android-package" value="hu.zalatnai.native_notification"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.WAKE_LOCK" />
+            <uses-permission android:name="android.permission.VIBRATE"/>
+            <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+            <permission android:name="$PACKAGE_NAME.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+            <uses-permission android:name="$PACKAGE_NAME.permission.C2D_MESSAGE" />
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <receiver
+                    android:name="com.google.android.gms.gcm.GcmReceiver"
+                    android:exported="true"
+                    android:permission="com.google.android.c2dm.permission.SEND" >
+                <intent-filter>
+                    <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                    <category android:name="$PACKAGE_NAME" />
+                </intent-filter>
+            </receiver>
+            <service
+                    android:name="hu.zalatnai.native_notification.GCMIntentService"
+                    android:exported="false" >
+                <intent-filter>
+                    <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                </intent-filter>
+            </service>
+            <service
+                    android:name="hu.zalatnai.native_notification.PushInstanceIDListenerService"
+                    android:exported="false">
+                <intent-filter>
+                    <action android:name="com.google.android.gms.iid.InstanceID"/>
+                </intent-filter>
+            </service>
+        </config-file>
+
+        <framework src="com.android.support:support-v13:23+" />
+        <framework src="com.google.android.gms:play-services-gcm:+" />
+
+        <source-file src="src/android/hu/zalatnai/native_notification/GCMIntentService.java" target-dir="src/hu/zalatnai/native_notification/" />
+        <source-file src="src/android/hu/zalatnai/native_notification/PushInstanceIDListenerService.java" target-dir="src/hu/zalatnai/native_notification/" />
+        <source-file src="src/android/hu/zalatnai/native_notification/NotificationPlugin.java" target-dir="src/hu/zalatnai/native_notification/" />
+
+    </platform>
+</plugin>
